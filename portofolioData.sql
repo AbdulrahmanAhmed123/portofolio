@@ -70,7 +70,7 @@ on d1.location=d2.location and d1.date=d2.date
 where d1.continent is not null 
 order by 2,3
 
-
+--use partition
 select d1.continent,d1.location ,d1.date,d1.population,d2.new_vaccinations
 ,sum(
 convert( BIGINT ,d2.new_vaccinations  )
@@ -104,7 +104,7 @@ from popvsVac
 order by 2,3
 
 
-
+--create table and restore data
 create table #percentagepopulatevaccinated
 (
 continent nvarchar(255),
@@ -130,6 +130,7 @@ order by 2,3
 select *,(dividLocation/population)*100 locPopupercentage
 from #percentagepopulatevaccinated
 
+  --use view
 create view percentagepopulatevaccinated as
 select d1.continent,d1.location ,d1.date,d1.population,d2.new_vaccinations
 ,sum(
